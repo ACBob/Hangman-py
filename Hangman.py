@@ -38,17 +38,13 @@ def get_word(category = "any"):
     return random.choice(list(words[category]))
 
 def disp_letters():
-    print("")
     letters_disp=[]
     for x in letters:
         if letters.get(x) == True:
             letters_disp.append(esc(33)+x+esc(0))
         else:
             letters_disp.append(x) 
-    print(" ".join(letters_disp[:9]))
-    print(" ".join(letters_disp[10:19]))
-    print("  "+" ".join(letters_disp[19:]))
-    print("")
+    print("\n "+" ".join(letters_disp[:9])+"\n "+" ".join(letters_disp[10:19])+"\n "+"  "+" ".join(letters_disp[19:]))
 
 def disp_lines():
     out = ""
@@ -69,7 +65,7 @@ def disp_lines():
         raise StopIteration
 def choose_letters():
     global guesses
-    entered_letters = raw_input("Enter letters: ")
+    entered_letters = raw_input(" Enter letters: ")
     for x in entered_letters:
         if x.upper() in letters and letters.get(x.upper()) == False:
             letters[x.upper()] = True
@@ -77,8 +73,8 @@ def choose_letters():
                 guesses -= 1
 
 while True:
-    print("Available categories: "+", ".join(words.keys()))
-    category = raw_input("Choose Category: ")
+    print(" Available categories: "+", ".join(words.keys()))
+    category = raw_input(" Choose Category: ")
     if category == "":
         category = "any"
         break
@@ -97,9 +93,9 @@ while guesses != 0:
         disp_lines()
     except StopIteration:
         break
-    print(guesses)
+    print("\n Guesses: "+str(guesses)+"\n")
     choose_letters()
 
 
 clear()
-print("Game Over")
+print(" Game Over")
