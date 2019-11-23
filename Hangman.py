@@ -16,7 +16,12 @@ def GetInput(message=""):
     else:
         return raw_input(message)
 
-os.system('title Hangman')
+if platform.system() == "Windows":
+    os.system('title Hangman')
+elif platform.system() == "Linux":
+    os.system('xtitle -t Hangman')
+else:
+    print("lol is it a mac")
 clear()
 words = {
     "animals":{"fox","tiger","dog","cat","falcon"},
