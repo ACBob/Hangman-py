@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*- 
-import random, os, platform
+import random, os, platform, sys
 
 if platform.system() == "Windows":
     os.system('chcp 65001')
+    
 def clear():
     if platform.system() == "Windows":
         os.system('cls')
     else:
         os.system('clear')
+
+def GetInput(message=""):
+    if sys.version_info >= (3,0):
+        return input(message)
+    else:
+        return raw_input(message)
+
 os.system('title Hangman')
 clear()
 words = {
@@ -51,7 +59,7 @@ def disp_letters():
     print("\n "+" ".join(letters_disp[:9])+"\n "+" ".join(letters_disp[10:19])+"\n "+"  "+" ".join(letters_disp[19:]))
 
 def limb_check(char,min_guesses):
-	if min_guesses <= guesses:
+	if not min_guesses <= guesses:
 		return char
 	else:
 	    return " "
@@ -59,9 +67,9 @@ def draw_hangman(guesses):
     spacing = " "*3
     out = "\n"+spacing+" ┍━━━━━━━━┑"
     out += "\n"+spacing+" │       ╲│"
-    out += "\n"+spacing+" "+limb_check("O",1)+"        │"
-    out += "\n"+spacing+limb_check("╱",4)+limb_check("│",2)+limb_check("╲",3)+"       │"
-    out += "\n"+spacing+limb_check("╱",6)+" "+limb_check("╲",5)+"       │"
+    out += "\n"+spacing+" "+limb_check("O",6)+"        │"
+    out += "\n"+spacing+limb_check("╱",4)+limb_check("│",5)+limb_check("╲",3)+"       │"
+    out += "\n"+spacing+limb_check("╱",2)+" "+limb_check("╲",1)+"       │"
     out += "\n"+spacing+"          │"
     out += "\n"+spacing+"         ╱━╲"+"\n"
     print(out)
@@ -85,7 +93,7 @@ def disp_lines():
         raise StopIteration
 def choose_letters():
     global guesses
-    entered_letters = raw_input(" Enter letters: ")
+    entered_letters = GetInput(" Enter letters: ")
     for x in entered_letters:
         if x.upper() in letters and letters.get(x.upper()) == False:
             letters[x.upper()] = True
@@ -94,7 +102,7 @@ def choose_letters():
 
 while True:
     print(" Available categories: "+", ".join(words.keys()))
-    category = raw_input(" Choose Category: ")
+    category = GetInput(" Choose Category: ")
     if category == "":
         category = "any"
         break
