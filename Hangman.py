@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-import random, os, platform, sys
+import random, os, platform, sys, collections
 
 if platform.system() == "Windows":
     os.system('chcp 65001')
@@ -39,10 +39,19 @@ words = {
 letters = {
     "A":False, "B":False, "C":False, "D":False, "E":False, "F":False, "G":False, "H":False, "I":False, "J":False, 
     "K":False, "L":False, "M":False, "N":False, "O":False, "P":False, "Q":False, "R":False, "S":False, "T":False, 
-    "U":False, "V":False, "W":False, "X":False, "Y":False, "Z":False
+    "U":False, "V":False, "W":False, "X":False, "Y":False, "Z":False, "φ":False
 }
-guesses = 6
+def to_sorteddict(dict):
+	out = collections.OrderedDict()
+	for i in sorted (dict):
+		out[i] = dict[i]
+	return out
 
+letters = to_sorteddict(letters)
+words = to_sorteddict(words)
+
+guesses = 6
+win=False
 def esc(code):
     return "\033["+str(code)+"m"
 
@@ -65,7 +74,7 @@ def disp_letters():
             letters_disp.append(esc(31)+x+esc(0))
         else:
             letters_disp.append(x) 
-    print("\n "+" ".join(letters_disp[:9])+"\n "+" ".join(letters_disp[10:19])+"\n "+"  "+" ".join(letters_disp[19:]))
+    print("\n "+" ".join(letters_disp[:10])+"\n "+" ".join(letters_disp[10:20])+"\n "+" "*4+" ".join(letters_disp[20:26]))
 
 def limb_check(char,min_guesses):
 	if not min_guesses <= guesses:
@@ -73,7 +82,7 @@ def limb_check(char,min_guesses):
 	else:
 	    return " "
 def draw_hangman(guesses):
-    spacing = " "*3
+    spacing = " "*5
     out = "\n"+spacing+" ┍━━━━━━━━┑"
     out += "\n"+spacing+" │       ╲│"
     out += "\n"+spacing+" "+limb_check("O",6)+"        │"
@@ -124,7 +133,7 @@ word = get_word(category)
 clear()
 
 
-while guesses != 0:
+while not guesses <= 0:
     clear()
     disp_letters()
     try:
@@ -137,5 +146,14 @@ while guesses != 0:
 
 
 clear()
-print(" Game Over")
-print(" Word was {}!".format(word))
+disp_letters()
+try:
+	disp_lines()
+except StopIteration:
+	win=True
+draw_hangman(guesses)
+if guesses <= 0:
+	print(" [91mYou lose[0m")
+	print(" Word was {}!".format(word))
+else:
+	print(" [92mYou Win![0m")
