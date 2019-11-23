@@ -130,4 +130,4 @@ while guesses != 0:
 
 clear()
 print(" Game Over")
-print(" Word was {}, Nice try though!".format(word))
+print(" Word was {}!".format(word))
