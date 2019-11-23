@@ -59,7 +59,7 @@ def disp_letters():
     print("\n "+" ".join(letters_disp[:9])+"\n "+" ".join(letters_disp[10:19])+"\n "+"  "+" ".join(letters_disp[19:]))
 
 def limb_check(char,min_guesses):
-	if min_guesses <= guesses:
+	if not min_guesses <= guesses:
 		return char
 	else:
 	    return " "
@@ -67,9 +67,9 @@ def draw_hangman(guesses):
     spacing = " "*3
     out = "\n"+spacing+" ┍━━━━━━━━┑"
     out += "\n"+spacing+" │       ╲│"
-    out += "\n"+spacing+" "+limb_check("O",1)+"        │"
-    out += "\n"+spacing+limb_check("╱",4)+limb_check("│",2)+limb_check("╲",3)+"       │"
-    out += "\n"+spacing+limb_check("╱",6)+" "+limb_check("╲",5)+"       │"
+    out += "\n"+spacing+" "+limb_check("O",6)+"        │"
+    out += "\n"+spacing+limb_check("╱",4)+limb_check("│",5)+limb_check("╲",3)+"       │"
+    out += "\n"+spacing+limb_check("╱",2)+" "+limb_check("╲",1)+"       │"
     out += "\n"+spacing+"          │"
     out += "\n"+spacing+"         ╱━╲"+"\n"
     print(out)
