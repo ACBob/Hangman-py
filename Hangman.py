@@ -73,7 +73,7 @@ def limb_check(char,min_guesses):
 	else:
 	    return " "
 def draw_hangman(guesses):
-    spacing = " "*3
+    spacing = " "*5
     out = "\n"+spacing+" ┍━━━━━━━━┑"
     out += "\n"+spacing+" │       ╲│"
     out += "\n"+spacing+" "+limb_check("O",6)+"        │"
