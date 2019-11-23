@@ -1,4 +1,8 @@
+# -*- coding: utf-8 -*- 
 import random, os, platform
+
+if platform.system() == "Windows":
+    os.system('chcp 65001')
 def clear():
     if platform.system() == "Windows":
         os.system('cls')
@@ -45,6 +49,22 @@ def disp_letters():
         else:
             letters_disp.append(x) 
     print("\n "+" ".join(letters_disp[:9])+"\n "+" ".join(letters_disp[10:19])+"\n "+"  "+" ".join(letters_disp[19:]))
+
+def limb_check(char,min_guesses):
+	if min_guesses <= guesses:
+		return char
+	else:
+	    return " "
+def draw_hangman(guesses):
+    spacing = " "*3
+    out = "\n"+spacing+" ┍━━━━━━━━┑"
+    out += "\n"+spacing+" │       ╲│"
+    out += "\n"+spacing+" "+limb_check("O",1)+"        │"
+    out += "\n"+spacing+limb_check("╱",4)+limb_check("│",2)+limb_check("╲",3)+"       │"
+    out += "\n"+spacing+limb_check("╱",6)+" "+limb_check("╲",5)+"       │"
+    out += "\n"+spacing+"          │"
+    out += "\n"+spacing+"         ╱━╲"+"\n"
+    print(out)
 
 def disp_lines():
     out = ""
@@ -94,6 +114,7 @@ while guesses != 0:
     except StopIteration:
         break
     print("\n Guesses: "+str(guesses)+"\n")
+    draw_hangman(guesses)
     choose_letters()
 
 
