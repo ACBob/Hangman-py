@@ -60,14 +60,16 @@ def disp_letters():
     letters_disp=[]
     for x in letters:
         if letters.get(x) == True:
-            letters_disp.append(esc(33)+x+esc(0))
+            letters_disp.append(esc(32)+x+esc(0))
+        elif letters.get(x) == 2:
+            letters_disp.append(esc(31)+x+esc(0))
         else:
             letters_disp.append(x) 
     print("\n "+" ".join(letters_disp[:9])+"\n "+" ".join(letters_disp[10:19])+"\n "+"  "+" ".join(letters_disp[19:]))
 
 def limb_check(char,min_guesses):
 	if not min_guesses <= guesses:
-		return char
+		return esc(31)+char+esc(0)
 	else:
 	    return " "
 def draw_hangman(guesses):
@@ -106,6 +108,7 @@ def choose_letters():
             letters[x.upper()] = True
             if x not in word:
                 guesses -= 1
+                letters[x.upper()] = 2
 
 while True:
     print(" Available categories: "+", ".join(words.keys()))
