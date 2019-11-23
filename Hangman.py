@@ -144,5 +144,6 @@ except StopIteration:
 draw_hangman(guesses)
 if guesses <= 0:
 	print(" [91mYou lose[0m")
+	print(" Word was {}!".format(word))
 else:
 	print(" [92mYou Win![0m")
