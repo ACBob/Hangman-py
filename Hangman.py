@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-import random, os, platform, sys
+import random, os, platform, sys, collections
 
 if platform.system() == "Windows":
     os.system('chcp 65001')
@@ -32,8 +32,17 @@ words = {
 letters = {
     "A":False, "B":False, "C":False, "D":False, "E":False, "F":False, "G":False, "H":False, "I":False, "J":False, 
     "K":False, "L":False, "M":False, "N":False, "O":False, "P":False, "Q":False, "R":False, "S":False, "T":False, 
-    "U":False, "V":False, "W":False, "X":False, "Y":False, "Z":False
+    "U":False, "V":False, "W":False, "X":False, "Y":False, "Z":False, "φ":False
 }
+def to_sorteddict(dict):
+	out = collections.OrderedDict()
+	for i in sorted (dict):
+		out[i] = dict[i]
+	return out
+
+letters = to_sorteddict(letters)
+words = to_sorteddict(words)
+
 guesses = 6
 
 def esc(code):
@@ -56,7 +65,7 @@ def disp_letters():
             letters_disp.append(esc(33)+x+esc(0))
         else:
             letters_disp.append(x) 
-    print("\n "+" ".join(letters_disp[:9])+"\n "+" ".join(letters_disp[10:19])+"\n "+"  "+" ".join(letters_disp[19:]))
+    print("\n "+" ".join(letters_disp[:10])+"\n "+" ".join(letters_disp[10:20])+"\n "+" "*4+" ".join(letters_disp[20:26]))
 
 def limb_check(char,min_guesses):
 	if not min_guesses <= guesses:
