@@ -26,7 +26,9 @@ words = {
     "companies":{"youtube","google","microsoft","apple","nintendo","gamefreak"},
     "candy":{"mnms","skittles","smarties","snickers","tootsierolls"},
     "superheros":{"superman","spiderman","captain america","black panther","flash","ben ten"},
-    "card games":{"uno","poker","magic the gathering","yugioh","pokemon","superfight"}
+    "card games":{"uno","poker","magic the gathering","yugioh","pokemon","superfight"},
+    "programming languages":{"python","cpp","brainfuck","javascript","cobol","the c programming language","ruby","scratch","objective c"},
+    "meta":{"print","get word","esc","getinput","disp letters","get allwords","disp lines"}
 }
 
 letters = {
