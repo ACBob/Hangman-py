@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*- 
-import random, os, platform
+import random, os, platform, sys
 
 if platform.system() == "Windows":
     os.system('chcp 65001')
+    
 def clear():
     if platform.system() == "Windows":
         os.system('cls')
     else:
         os.system('clear')
+
+def GetInput(message=""):
+    if sys.version_info >= (3,0):
+        return input(message)
+    else:
+        return raw_input(message)
+
 os.system('title Hangman')
 clear()
 words = {
@@ -85,7 +93,7 @@ def disp_lines():
         raise StopIteration
 def choose_letters():
     global guesses
-    entered_letters = raw_input(" Enter letters: ")
+    entered_letters = GetInput(" Enter letters: ")
     for x in entered_letters:
         if x.upper() in letters and letters.get(x.upper()) == False:
             letters[x.upper()] = True
@@ -94,7 +102,7 @@ def choose_letters():
 
 while True:
     print(" Available categories: "+", ".join(words.keys()))
-    category = raw_input(" Choose Category: ")
+    category = GetInput(" Choose Category: ")
     if category == "":
         category = "any"
         break
