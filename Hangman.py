@@ -123,7 +123,7 @@ while guesses != 0:
         disp_lines()
     except StopIteration:
         break
-    print("\n Guesses: "+str(guesses)+"\n")
+    #print("\n Guesses: "+str(guesses)+"\n")
     draw_hangman(guesses)
     choose_letters()
 
