@@ -44,7 +44,7 @@ letters = to_sorteddict(letters)
 words = to_sorteddict(words)
 
 guesses = 6
-
+win=False
 def esc(code):
     return "\033["+str(code)+"m"
 
@@ -123,7 +123,7 @@ word = get_word(category)
 clear()
 
 
-while guesses != 0:
+while not guesses <= 0:
     clear()
     disp_letters()
     try:
@@ -136,4 +136,13 @@ while guesses != 0:
 
 
 clear()
-print(" Game Over")
+disp_letters()
+try:
+	disp_lines()
+except StopIteration:
+	win=True
+draw_hangman(guesses)
+if guesses <= 0:
+	print(" [92mYou Win![0m")
+else:
+	print(" [91mYou lose[0m")
