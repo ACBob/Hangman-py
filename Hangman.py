@@ -143,6 +143,6 @@ except StopIteration:
 	win=True
 draw_hangman(guesses)
 if guesses <= 0:
-	print(" [92mYou Win![0m")
-else:
 	print(" [91mYou lose[0m")
+else:
+	print(" [92mYou Win![0m")
